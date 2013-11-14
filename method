@@ -1,0 +1,35 @@
+1. install the vlan and upload the 8021q module
+   #aptitude install vlan
+   #modprobe 8021q
+   
+   after the opration, you should verify the 8021q is uploaded
+   #lsmod | grep 8021q
+   
+2. config the vlan
+   you should take out a network card specially to config the vlan. In this method we use the eth1.
+   config the vlan tag:
+   #vconfig add eth1 1000
+   #vconfig set_flag eth1.1000 1 1
+   alloc an ip for the eth1.1000
+   #ifconfig eth1 0.0.0.0
+   #ifconfig eth1.1000 22.22.22.222 netmask 255.255.255.0 up
+   
+   after these steps, you have own the ip 22.22.22.222.
+   
+
+3. other oprations
+   you may want to remove the vlan in some times:
+   #vconfig rem eth1.1000
+   
+   ............................................
+   < I didn't verify the content in the below >
+   ............................................
+   
+   you may want to write the ip in the config files in you system.
+   #echo "modprobe 8021q">>/etc/rc.local 
+   
+   add the content in the below to the /etc/network/interfaces
+   iface eth1.1000 inet static
+   address 22.22.22.222
+   netmask 255.255.255.0
+   
