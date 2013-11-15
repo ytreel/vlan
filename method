@@ -14,6 +14,12 @@
    #ifconfig eth1 0.0.0.0
    #ifconfig eth1.1000 22.22.22.222 netmask 255.255.255.0 up
    
+   you also have to activate the eth1, use this command
+   #ifconfig eth1 up
+   
+   in the first i use the command ifup eth1, and it don't work, then i know that this command need you to config the interfaces file first.
+   but you can also use the command dhclient eth1 to activate the network card.
+   
    after these steps, you have own the ip 22.22.22.222.
    
 
